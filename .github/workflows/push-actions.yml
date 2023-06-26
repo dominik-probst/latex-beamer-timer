@@ -1,0 +1,25 @@
+name: Build and Publish PDF
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup and Build PDF
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: timer.tex
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v2
+        with:
+          name: timer.pdf
+          path: ./timer.pdf
